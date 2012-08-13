@@ -1,0 +1,11 @@
+{% load markup %}
+
+<html>
+<head><title>{{card.name}}, {{card.title}}</title></head>
+<body>
+<h1>{{card.name}}</h1>
+<h2>{{card.title}}</h2>
+<h2>Of House {{card.house}}</h2>
+{{card.body|markdown}}
+</body>
+</html>

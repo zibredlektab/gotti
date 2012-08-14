@@ -2,6 +2,7 @@
 
 from django import template
 from django.template import Template, Variable, TemplateSyntaxError
+from ..models import Card
 
 register = template.Library()
 
@@ -58,14 +59,23 @@ class CharNode(template.Node):
         
     def render(self, context):
         slug = self.slug.resolve(context)
-        #card = Card.objects.get(slug=self.slug)
+        try:
+            card = Card.objects.get(slug=slug)
+        except Card.DoesNotExist:
+            card = None
         if self.text:
             text = self.text.resolve(context)
+        elif card:
+            text = card.name
         else:
-            text = "{char: %s}" % slug
-        url = "/%s" % slug
-        title = "Learn more about %s" % slug
+            text = "{card: %s}" % slug
+        if card:
+            url = card.get_absolute_url()
+        else:
+            url = "/admin/cards/card/add/?slug=%s" % slug
+        title = "Learn more about %s" % text
         return '[%s](%s "%s")' % (text, url, title)        
+
 @register.tag
 def char(parser, token):
     bits = token.split_contents()

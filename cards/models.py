@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 class Card(models.Model):
     slug = models.CharField(max_length=50)
@@ -12,4 +13,7 @@ class Card(models.Model):
         return self.name
         
     def __repr__(self):
-        return "<Card %s>" % self.name
+        return "<Card: %s>" % self.name
+
+    def get_absolute_url(self):
+        return reverse('show_card', kwargs={'slug': self.slug})

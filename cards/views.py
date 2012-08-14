@@ -14,12 +14,17 @@ def home(request):
             'page': session.get('page'),
             'book': BOOK_DICT[session.get('book')],
             'pos': session.get('pos')
-            }
-        )
+        }
+    )
     
 def show_card(request, slug):
     card = Card.objects.get(slug=slug)
-    return render_to_response('cards/card.html', {'card': card})
+    return render_to_response(
+        'cards/card.html', {
+            'card': card,
+            'pos': request.session.get('pos'),
+        }
+    )
     
 BOOKS = [
     ('1', 'A Game of Thrones'),

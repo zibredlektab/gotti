@@ -12,7 +12,8 @@ class RenderAsTemplateNode(template.Node):
     def render(self, context):
         try:
             actual_item = self.item_to_be_rendered.resolve(context)
-            return Template(actual_item).render(context)
+            template_text = "{% load cards %}\n" + actual_item
+            return Template(template_text).render(context)
         except template.VariableDoesNotExist:
             return ''
 
@@ -25,3 +26,53 @@ def render_as_template(parser, token):
             " (a variable representing a template to render)" % bits[0]
         )
     return RenderAsTemplateNode(bits[1])
+
+class PosNode(template.Node):
+    def __init__(self, pos, nodelist):
+        self.pos = int(pos)
+        self.nodelist = nodelist
+        
+    def render(self, context):
+        pos = int(context.get('pos', 0))
+        print "Comparing %r >= %r" % (pos, self.pos)
+        if pos >= self.pos:
+            output = self.nodelist.render(context)
+        else:
+            output = ""
+        return output
+       
+@register.tag 
+def pos(parser, token):
+    bits = token.split_contents()
+    if len(bits) != 2:
+        raise TemplateSyntaxError("pos takes one argument")
+    pos = bits[1]
+    nodelist = parser.parse(('endpos',))
+    parser.delete_first_token()
+    return PosNode(pos, nodelist)
+
+class CharNode(template.Node):
+    def __init__(self, slug, text=None):
+        self.slug = Variable(slug)
+        self.text = Variable(text) if text else None
+        
+    def render(self, context):
+        slug = self.slug.resolve(context)
+        #card = Card.objects.get(slug=self.slug)
+        if self.text:
+            text = self.text.resolve(context)
+        else:
+            text = "{char: %s}" % slug
+        url = "/%s" % slug
+        title = "Learn more about %s" % slug
+        return '[%s](%s "%s")' % (text, url, title)        
+@register.tag
+def char(parser, token):
+    bits = token.split_contents()
+    slug = text = None
+    if len(bits) >= 2:
+        slug = bits[1]
+    if len(bits) >= 3:
+        text = bits[2]
+    return CharNode(slug, text)
+    

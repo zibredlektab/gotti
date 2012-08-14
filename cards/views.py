@@ -5,15 +5,15 @@ from cards.models import Card
 
 def home(request):
     session = request.session
-    if 'book' not in session:
+    if 'pos' not in session:
         return HttpResponseRedirect('/settings')
-    cards = Card.objects.all()
+    cards = Card.objects.filter(first_appears__lte = session.get('pos'))
     return render_to_response(
         'cards/home.html', {
             'cards': cards,
             'page': session.get('page'),
             'book': BOOK_DICT[session.get('book')],
-            'pos': map_position(session.get('book'), session.get('page'))
+            'pos': session.get('pos')
             }
         )
     
@@ -45,7 +45,7 @@ def settings(request):
             # ...
             request.session['book'] = form.cleaned_data['book']
             request.session['page'] = form.cleaned_data['page']
-            request.session['pos'] = 0
+            request.session['pos'] = map_position(form.cleaned_data['book'], form.cleaned_data['page'])
             return HttpResponseRedirect('/') # Redirect after POST
     else:
         default_data = {
@@ -101,7 +101,9 @@ def map_position(book, page):
         if num > page:
             pos = i
             break
-    
+    else:
+        pos = i+1
+        
     pos += booklist['base']
     return pos
     

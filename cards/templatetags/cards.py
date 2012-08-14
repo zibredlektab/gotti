@@ -52,7 +52,7 @@ def pos(parser, token):
     parser.delete_first_token()
     return PosNode(pos, nodelist)
 
-class CharNode(template.Node):
+class CardNode(template.Node):
     def __init__(self, slug, text=None):
         self.slug = Variable(slug)
         self.text = Variable(text) if text else None
@@ -77,12 +77,12 @@ class CharNode(template.Node):
         return '[%s](%s "%s")' % (text, url, title)        
 
 @register.tag
-def char(parser, token):
+def card(parser, token):
     bits = token.split_contents()
     slug = text = None
     if len(bits) >= 2:
         slug = bits[1]
     if len(bits) >= 3:
         text = bits[2]
-    return CharNode(slug, text)
+    return CardNode(slug, text)
     

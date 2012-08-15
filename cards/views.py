@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import redirect, render, render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from cards.models import Card
@@ -26,6 +26,49 @@ def show_card(request, slug):
         }
     )
     
+def yaml_card(request, slug):
+    """Deliver a card as a YAML file."""
+    on_page = bool(int(request.REQUEST.get('page', '0')))
+    card = get_object_or_404(Card, slug=slug)
+    mimetype="text/plain" if on_page else "text/yaml"  
+    response = HttpResponse(card.as_yaml(), mimetype=mimetype)
+    if not on_page:
+        response['Content-Disposition'] = 'attachment; filename=%s.yaml' % card.slug
+    return response
+
+def export_all(request):
+    """Deliver all the cards as YAML."""
+    on_page = bool(int(request.REQUEST.get('page', '0')))
+    yaml = ['# all the gotti cards']
+    for card in Card.objects.all():
+        yaml.append('---')
+        yaml.append(card.as_yaml())
+    mimetype="text/plain" if on_page else "text/yaml"  
+    response = HttpResponse("\n".join(yaml), mimetype=mimetype)
+    if not on_page:
+        response['Content-Disposition'] = 'attachment; filename=gotti.yaml'
+    return response
+
+def import_lots(request):
+    """Import a bunch of cards."""
+    if request.method == "POST":
+        form = ImportCardForm(request.POST, request.FILES)
+        if form.is_valid():
+            for card in Card.from_yaml(request.FILES['yamlfile']):
+                card.save()
+            return redirect('home')
+    else:
+        form = ImportCardForm()
+
+    return render(request, 'cards/import.html', {'form': form})
+
+class ImportCardForm(forms.Form):
+    yamlfile = forms.FileField(
+        label='Select a YAML file',
+        help_text='Some Help'
+    )
+
+
 BOOKS = [
     ('1', 'A Game of Thrones'),
     ('2', 'A Clash of Kings'),

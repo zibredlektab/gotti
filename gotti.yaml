@@ -1,0 +1,56 @@
+# all the gotti cards
+---
+slug: joffrey
+name: "Joffrey Baratheon"
+title: ""
+house: "Baratheon"
+first_appears: 1000
+body: |-
+    Joffrey is a douche. His mom is [cersei].
+
+---
+slug: cersei
+name: "Cersei Lannister"
+title: ""
+house: ""
+first_appears: 1000
+body: |-
+    Cersei is really mean.  [joffrey The Dick] is her son, she'll do anything for him. She boinks [jamie], ick.
+    [9999 Actually, she's just misunderstood.]
+    [1000 She has blond hair, like her [tywin Father]].
+
+---
+slug: jamie
+name: "Jamie Lannister"
+title: "Kingslayer"
+house: "Lannister"
+first_appears: 1010
+body: |-
+    Good looking.  Mean.
+
+---
+slug: tywin
+name: "Tywin Lannister"
+title: ""
+house: ""
+first_appears: 1050
+body: |-
+    Old guy
+
+---
+slug: tyrion
+name: Tyrion Lannister
+title: The Imp
+house: Lannister
+first_appears: 1070
+body: |-
+    Tyrion is the dwarf son of [tywin].  
+    [2000 He's in love with [shea]].
+
+---
+slug: shea
+name: Shea
+first_appears: 2000
+body: |-
+    She was a prostitute, but now she isn't.
+

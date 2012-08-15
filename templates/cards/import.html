@@ -1,0 +1,19 @@
+{% extends "cards/base.html" %}
+
+{% block title %}Import cards{% endblock %}
+
+{% block body %}
+<h1>Import Cards</h1>
+
+<p>You can import cards in YAML form:</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.yamlfile.help_text }}
+    {{ form.yamlfile.label_tag }}
+    {{ form.yamlfile.errors }}
+    {{ form.yamlfile }}
+    <input type="submit" value="Import" />
+</form>
+{% endblock %}

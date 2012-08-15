@@ -6,7 +6,9 @@
 <body>
 <h1>{{card.name}}</h1>
 <h2>{{card.title}}</h2>
+{% if card.house %}
 <h2>Of House {{card.house}}</h2>
+{% endif %}
 {% filter markdown %}
 {% render_as_template card.body %}
 {% endfilter %}

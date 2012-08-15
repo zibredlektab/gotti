@@ -1,10 +1,10 @@
-{% extends "cards/base.html" %}
+{% extends "cards/page.html" %}
 
 {% block title %}GoT Spoiler-Free Reference Guide{% endblock title %}
 
 {% block body %}
 <h1>The Game of Thrones Spoiler-Free Reference Guide</h1>
-<p>You are on page {{page}} in {{book}}, in the {{edition}} edition (position {{pos}}) (<a href="{% url settings %}">hey, that's not right!</a>), so there are {{cards|length}} cards:</p>
+<p>There are {{cards|length}} cards:</p>
 <ul>
   {% for card in cards %}
   <li><a href="{% url show_card slug=card.slug %}">{{card.name}}</a></li>

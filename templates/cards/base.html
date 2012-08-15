@@ -32,7 +32,10 @@
     </style>
   </head>
   <body>
-    <header>GoT Spoiler-Free Reference!</header>
+    <header>
+      <a href="/">GoT Spoiler-Free Reference!</a>
+      {% block header %}{% endblock %}
+    </header>
     {% block body %}{% endblock %}
     <footer>Made by zib and nedbat.</footer>
   </body>

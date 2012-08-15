@@ -19,11 +19,15 @@ def home(request):
     )
     
 def show_card(request, slug):
+    session = request.session
     card = Card.objects.get(slug=slug)
     return render_to_response(
         'cards/card.html', {
             'card': card,
-            'pos': request.session.get('pos'),
+            'page': session.get('page'),
+            'book': BOOK_DICT[session.get('book')],
+            'edition': EDITION_DICT[session.get('edition')],
+            'pos': session.get('pos')
         }
     )
     
@@ -169,7 +173,7 @@ PAGE_NUMS = {
             },
         '5': {
             'base': 5000,
-            'pages': [0]
+            'pages': [16, 31, 46, 60, 71, 83, 95, 112, 123, 134, 148, 161, 169, 179, 192, 203, 218, 232, 243, 253, 267, 276, 293, 306, 320, 332, 351, 372, 382, 395, 407, 420, 434, 448, 461, 473, 484, 500, 514, 524, 536, 549, 564, 579, 593, 605, 618, 632, 647, 661, 673, 687, 700, 717, 730, 741, 754, 769, 783, 793, 801, 814, 827, 835, 848, 860, 872, 887, 899, 914, 929, 944]
             },
         '6': {
             'base': 6000,

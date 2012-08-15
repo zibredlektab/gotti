@@ -3,6 +3,7 @@
 from django import template
 from django.template import Template, Variable, TemplateSyntaxError
 from ..models import Card
+from ..markup import markup_to_django
 
 register = template.Library()
 
@@ -13,7 +14,7 @@ class RenderAsTemplateNode(template.Node):
     def render(self, context):
         try:
             actual_item = self.item_to_be_rendered.resolve(context)
-            template_text = "{% load cards %}\n" + actual_item
+            template_text = "{% load cards %}\n" + markup_to_django(actual_item)
             return Template(template_text).render(context)
         except template.VariableDoesNotExist:
             return ''
@@ -63,11 +64,12 @@ class CardNode(template.Node):
             card = Card.objects.get(slug=slug)
         except Card.DoesNotExist:
             card = None
+        text = ""
         if self.text:
             text = self.text.resolve(context)
-        elif card:
+        if not text and card:
             text = card.name
-        else:
+        if not text:
             text = "{card: %s}" % slug
         if card:
             url = card.get_absolute_url()

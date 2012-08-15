@@ -1,16 +1,16 @@
+{% extends "cards/base.html" %}
 {% load markup %}
 {% load cards %}
 
-<html>
-<head><title>{{card.name}}, {{card.title}}</title></head>
-<body>
-<h1>{{card.name}}</h1>
-<h2>{{card.title}}</h2>
-{% if card.house %}
-<h2>Of House {{card.house}}</h2>
-{% endif %}
-{% filter markdown %}
-{% render_as_template card.body %}
-{% endfilter %}
-</body>
-</html>
+{% block title %}{{card.name}}, {{card.title}}{% endblock %}
+
+{% block body %}
+  <h1>{{card.name}}</h1>
+  <h2>{{card.title}}</h2>
+  {% if card.house %}
+    <h2>Of House {{card.house}}</h2>
+  {% endif %}
+  {% filter markdown %}
+    {% render_as_template card.body %}
+  {% endfilter %}
+{% endblock body %}

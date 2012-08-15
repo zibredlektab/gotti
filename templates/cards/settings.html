@@ -1,6 +1,8 @@
-<html>
-<head><title>Settings</title></head>
-<body>
+{% extends "cards/base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block body %}
 <h1>How far along are you?</h1>
 
 <form action="" method="post">
@@ -8,6 +10,4 @@
 {{ form.as_p }}
 <input type="submit" value="Done" />
 </form>
-
-</body>
-</html>
+{% endblock %}

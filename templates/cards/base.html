@@ -1,10 +1,39 @@
+<!DOCTYPE html>
 {# The base template for all of gotti. #}
-
 <html>
   <head>
-      <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+      html {
+        font-family: Georgia;
+        padding: 1em 5em;
+      }
+      .card {
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 100%;
+        padding: 1em;
+        margin-top: 1em;
+      }
+      header {
+        background-color: #b97;
+        border-radius: 5px;
+        display: block;
+        width: 100%;
+        padding: 1em;
+      }
+      footer {
+        color: #999;
+        font-style: italic;
+        text-align: right;
+        margin-top: 2em;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-      {% block body %}{% endblock %}
+    <header>GoT Spoiler-Free Reference!</header>
+    {% block body %}{% endblock %}
+    <footer>Made by zib and nedbat.</footer>
   </body>
 </html>

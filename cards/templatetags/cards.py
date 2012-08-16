@@ -53,7 +53,13 @@ class CardNode(template.Node):
         else:
             url = "/admin/cards/card/add/?slug=%s" % slug
         title = "Learn more about %s" % text
-        return '[%s](%s "%s")' % (text, url, title)        
+
+        pos = int(context.get('pos', 0))
+        if card.died and pos > card.died:
+            dead_class = ' dead'
+        else:
+            dead_class = ''
+        return "<a href='%s' class='cardlink%s' title='%s'>%s</a>" % (url, dead_class, title, text)
 
 @register.tag
 def card(parser, token):

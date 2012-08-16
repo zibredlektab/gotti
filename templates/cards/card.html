@@ -7,7 +7,9 @@
 {% block body %}
   <div class='card{% if card.died < pos %} dead{% endif %}'>
     <h1>{{card.name}}</h1>
-    <h2>{{card.title}}</h2>
+    {% if card.title %}
+      <h2>{% filter markdown %}{% render_as_template card.title %}{% endfilter %}</h2>
+    {% endif %}
     {% if card.house %}
       <h2>Of House {{card.house}}</h2>
     {% endif %}

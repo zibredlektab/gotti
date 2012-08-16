@@ -8,7 +8,8 @@ class Card(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
     house = models.CharField(max_length=50, blank=True, null=True)
     body = models.TextField()
-    first_appears = models.IntegerField()
+    first = models.IntegerField()
+    died = models.IntegerField(blank=True, null=True)
     
     def __unicode__(self):
         return self.name
@@ -26,7 +27,8 @@ class Card(models.Model):
             ("name", quoted(self.name)),
             ("title", quoted(self.title)),
             ("house", quoted(self.house)),
-            ("first_appears", self.first_appears),
+            ("first", self.first),
+            ("died", self.died),
             ("body", literal(self.body)),
             ]), indent=4)
 
@@ -39,7 +41,9 @@ class Card(models.Model):
             card.name = doc['name']
             card.title = doc.get('title', '')
             card.house = doc.get('house', '')
-            card.first_appears = int(doc['first_appears'])
+            card.first = int(doc['first'])
+            card.died = int(doc['died'])
             card.body  = doc['body']
+    		
             yield card
 

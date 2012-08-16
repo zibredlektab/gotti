@@ -7,7 +7,7 @@ def home(request):
     session = request.session
     if 'pos' not in session:
         return HttpResponseRedirect('/settings')
-    cards = Card.objects.filter(first_appears__lte = session.get('pos'))
+    cards = Card.objects.filter(first__lte = session.get('pos'))
     return render_to_response(
         'cards/home.html', {
             'cards': cards,

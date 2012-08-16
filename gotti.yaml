@@ -4,7 +4,8 @@ slug: joffrey
 name: "Joffrey Baratheon"
 title: ""
 house: "Baratheon"
-first_appears: 1000
+first: 1000
+died: 0
 body: |-
     Joffrey is a douche. His mom is [cersei].
 
@@ -13,7 +14,8 @@ slug: cersei
 name: "Cersei Lannister"
 title: ""
 house: ""
-first_appears: 1000
+first: 1000
+died: 6000
 body: |-
     Cersei is really mean.  [joffrey The Dick] is her son, she'll do anything for him. She boinks [jamie], ick.
     [9999 Actually, she's just misunderstood.]
@@ -24,7 +26,8 @@ slug: jamie
 name: "Jamie Lannister"
 title: "Kingslayer"
 house: "Lannister"
-first_appears: 1010
+first: 1010
+died: 0
 body: |-
     Good looking.  Mean.
 
@@ -33,7 +36,8 @@ slug: tywin
 name: "Tywin Lannister"
 title: ""
 house: ""
-first_appears: 1050
+first: 1050
+died: 0
 body: |-
     Old guy
 
@@ -42,7 +46,8 @@ slug: tyrion
 name: Tyrion Lannister
 title: The Imp
 house: Lannister
-first_appears: 1070
+first: 1070
+died: 0
 body: |-
     Tyrion is the dwarf son of [tywin].  
     [2000 He's in love with [shea]].
@@ -50,7 +55,8 @@ body: |-
 ---
 slug: shea
 name: Shea
-first_appears: 2000
+first: 2000
+died: 0
 body: |-
     She was a prostitute, but now she isn't.
 

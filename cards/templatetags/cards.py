@@ -1,5 +1,7 @@
 """Template tags for Cards."""
 
+import re
+
 from django import template
 from django.template import Template, Variable, TemplateSyntaxError
 from ..models import Card
@@ -15,7 +17,10 @@ class RenderAsTemplateNode(template.Node):
         try:
             actual_item = self.item_to_be_rendered.resolve(context)
             template_text = "{% load cards %}\n" + markup_to_django(actual_item)
-            return Template(template_text).render(context)
+            res = Template(template_text).render(context)
+            res = re.sub(r'\s+\n', '\n', res)
+            import pdb;pdb.set_trace() 
+            return res
         except template.VariableDoesNotExist:
             return ''
 

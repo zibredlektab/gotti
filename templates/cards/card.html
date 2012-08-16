@@ -2,7 +2,7 @@
 {% load markup %}
 {% load cards %}
 
-{% block title %}{{card.name}}, {{card.title}}{% endblock %}
+{% block title %}{{card.name}}{% if card.title %}, {{card.title}}{% endif %}{% endblock %}
 
 {% block body %}
   <section class='card{% if card.died and card.died < pos %} dead{% endif %}'>

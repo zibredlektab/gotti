@@ -5,16 +5,18 @@
 {% block title %}{{card.name}}, {{card.title}}{% endblock %}
 
 {% block body %}
-  <div class='card{% if card.died < pos %} dead{% endif %}'>
+  <section class='card{% if card.died < pos %} dead{% endif %}'>
     <h1>{{card.name}}</h1>
     {% if card.title %}
-      <h2>{% filter markdown %}{% render_as_template card.title %}{% endfilter %}</h2>
+      <h2>{% filter markdown|removetags:"p" %}{% render_as_template card.title %}{% endfilter %}</h2>
     {% endif %}
     {% if card.house %}
       <h2>Of House {{card.house}}</h2>
     {% endif %}
-    {% filter markdown %}
-      {% render_as_template card.body %}
-    {% endfilter %}
-  </div>
+    <section>
+      {% filter markdown %}
+        {% render_as_template card.body %}
+      {% endfilter %}
+    </section>
+  </section>
 {% endblock body %}

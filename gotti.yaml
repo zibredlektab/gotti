@@ -15,7 +15,7 @@ name: "Cersei Lannister"
 title: ""
 house: ""
 first: 1000
-died: 6000
+died: 5000
 body: |-
     Cersei is really mean.  [joffrey The Dick] is her son, she'll do anything for him. She boinks [jamie], ick.
     [9999 Actually, she's just misunderstood.]
@@ -37,26 +37,27 @@ name: "Tywin Lannister"
 title: ""
 house: ""
 first: 1050
-died: 0
+died: 2000
 body: |-
-    Old guy
+    His children are [cersei], [jamie], and [tyrion].
 
 ---
 slug: tyrion
-name: Tyrion Lannister
-title: The Imp
-house: Lannister
+name: "Tyrion Lannister"
+title: "The Imp"
+house: "Lannister"
 first: 1070
 died: 0
 body: |-
-    Tyrion is the dwarf son of [tywin].  
+    Tyrion is the dwarf son of [tywin]. His sister is [cersei]. [joffrey] is his nephew.
     [2000 He's in love with [shea]].
 
 ---
 slug: shea
-name: Shea
+name: "Shea"
+title: ""
+house: ""
 first: 2000
 died: 0
 body: |-
     She was a prostitute, but now she isn't.
-

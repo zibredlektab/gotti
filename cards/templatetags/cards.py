@@ -29,29 +29,6 @@ def render_as_template(parser, token):
         )
     return RenderAsTemplateNode(bits[1])
 
-class PosNode(template.Node):
-    def __init__(self, pos, nodelist):
-        self.pos = int(pos)
-        self.nodelist = nodelist
-        
-    def render(self, context):
-        pos = int(context.get('pos', 0))
-        print "Comparing %r >= %r" % (pos, self.pos)
-        if pos >= self.pos:
-            output = self.nodelist.render(context)
-        else:
-            output = ""
-        return output
-       
-@register.tag 
-def pos(parser, token):
-    bits = token.split_contents()
-    if len(bits) != 2:
-        raise TemplateSyntaxError("pos takes one argument")
-    pos = bits[1]
-    nodelist = parser.parse(('endpos',))
-    parser.delete_first_token()
-    return PosNode(pos, nodelist)
 
 class CardNode(template.Node):
     def __init__(self, slug, text=None):

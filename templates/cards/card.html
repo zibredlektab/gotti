@@ -5,7 +5,7 @@
 {% block title %}{{card.name}}, {{card.title}}{% endblock %}
 
 {% block body %}
-  <section class='card{% if card.died < pos %} dead{% endif %}'>
+  <section class='card{% if card.died and card.died < pos %} dead{% endif %}'>
     <h1>{{card.name}}</h1>
     {% if card.title %}
       <h2>{% filter markdown|removetags:"p" %}{% render_as_template card.title %}{% endfilter %}</h2>

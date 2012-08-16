@@ -7,7 +7,7 @@ def home(request):
     session = request.session
     if 'pos' not in session:
         return HttpResponseRedirect('/settings')
-    cards = Card.objects.filter(first__lte = session.get('pos'))
+    cards = Card.objects.filter(first__lte=session.get('pos'))
     return render_to_response(
         'cards/home.html', {
             'cards': cards,
@@ -31,6 +31,19 @@ def show_card(request, slug):
         }
     )
     
+def show_all(request):
+    session = request.session
+    cards = Card.objects.filter(first__lte=session.get('pos'))
+    return render_to_response(
+        'cards/allcards.html', {
+            'cards': cards,
+            'page': session.get('page'),
+            'book': BOOK_DICT[session.get('book')],
+            'edition': EDITION_DICT[session.get('edition')],
+            'pos': session.get('pos')
+        }
+    )
+
 def yaml_card(request, slug):
     """Deliver a card as a YAML file."""
     on_page = bool(int(request.REQUEST.get('page', '0')))

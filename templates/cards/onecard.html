@@ -1,0 +1,17 @@
+{# Include me to draw one card. #}
+{% load cards markup %}
+
+<section class='card{% if card.died and card.died < pos %} dead{% endif %}'>
+  <h1>{{card.name}}</h1>
+  {% if card.title %}
+    <h2>{% filter markdown|removetags:"p" %}{% render_as_template card.title %}{% endfilter %}</h2>
+  {% endif %}
+  {% if card.house %}
+    <h2>Of House {{card.house}}</h2>
+  {% endif %}
+  <section>
+    {% filter markdown %}
+      {% render_as_template card.body %}
+    {% endfilter %}
+  </section>
+</section>

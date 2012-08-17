@@ -6,9 +6,8 @@
 <h1>Page numbers</h1>
 
 {% for edname, eddata in pagedata %}
-    <h2>{{ edname }}</h2>
     {% for bookname, bookdata in eddata %}
-        <h3>{{ bookname }}</h3>
+        <h3>{{ edname }} &mdash; {{ bookname }}</h3>
         {% for page, pos in bookdata %}
             <p>Page {{ page }} &rarr; {{ pos }}</p>
         {% endfor %}

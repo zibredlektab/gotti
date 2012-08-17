@@ -1,0 +1,18 @@
+{% extends "cards/base.html" %}
+
+{% block title %}Page numbers{% endblock %}
+
+{% block body %}
+<h1>Page numbers</h1>
+
+{% for edname, eddata in pagedata.items %}
+    <h2>{{ edname }}</h2>
+    {% for bookname, bookdata in eddata.items %}
+        <h3>{{ bookname }}</h3>
+        {% for page, pos in bookdata %}
+            <p>Page {{ page }} &rarr; {{ pos }}</p>
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+{% endblock %}
+

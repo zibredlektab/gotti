@@ -115,3 +115,16 @@ def settings(request):
     return render(request, 'cards/settings.html', {
         'form': form,
     })
+
+def show_page_numbers(request):
+    # Make a displayable dict of everything.
+    pagedata = {}
+    for ed, edname in EDITIONS:
+        voldata = {}
+        for book, bookname in BOOKS:
+            voldata[bookname] = [(page, map_position(ed, book, page)) for page in PAGE_NUMS[ed][book]['pages']]
+        pagedata[edname] = voldata
+
+    return render(request, 'cards/pagenumbers.html', {
+        'pagedata': pagedata,
+    })

@@ -225,5 +225,3 @@ def map_position(edition, book, page):
         
     pos += booklist['base']
     return pos
-    
-

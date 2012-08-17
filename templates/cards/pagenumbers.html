@@ -5,9 +5,9 @@
 {% block body %}
 <h1>Page numbers</h1>
 
-{% for edname, eddata in pagedata.items %}
+{% for edname, eddata in pagedata %}
     <h2>{{ edname }}</h2>
-    {% for bookname, bookdata in eddata.items %}
+    {% for bookname, bookdata in eddata %}
         <h3>{{ bookname }}</h3>
         {% for page, pos in bookdata %}
             <p>Page {{ page }} &rarr; {{ pos }}</p>

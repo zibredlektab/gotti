@@ -14,7 +14,7 @@ EDITIONS = [
     ('US-P', 'US Paperback'),
     ('US-H', 'US Hardcover'),
     ('UK-P', 'UK Paperback'),
-    ('UK-H', 'UH Hardcover'),
+    ('UK-H', 'UK Hardcover'),
     ('K', 'Kindle'),
     ('EPUB', 'ePub'),
 ]

@@ -63,6 +63,9 @@ class CardNode(template.Node):
             dead_class = ' dead'
         else:
             dead_class = ''
+
+        text = text.replace(" ", "&nbsp;")
+
         return "<a href='%s' class='cardlink%s' title='%s'>%s</a>" % (url, dead_class, title, text)
 
 @register.tag

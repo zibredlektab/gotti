@@ -59,7 +59,7 @@ class CardNode(template.Node):
         title = "Learn more about %s" % text
 
         pos = int(context.get('pos', 0))
-        if card.died and pos > card.died:
+        if card and card.died and pos > card.died:
             dead_class = ' dead'
         else:
             dead_class = ''

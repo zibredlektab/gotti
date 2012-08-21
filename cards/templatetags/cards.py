@@ -18,7 +18,7 @@ class RenderAsTemplateNode(template.Node):
             actual_item = self.item_to_be_rendered.resolve(context)
             template_text = "{% load cards %}\n" + markup_to_django(actual_item)
             res = Template(template_text).render(context)
-            res = re.sub(r'\s+\n', '\n', res)
+            res = re.sub(r'[ \t]+\n', '\n', res)
             return res
         except template.VariableDoesNotExist:
             return ''
